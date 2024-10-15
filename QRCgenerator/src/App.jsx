@@ -1,34 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
+  const [inp,setInput]=useState("")
+  const [imageLink,setImageLink]=useState("")
+const GenerateQR=(e)=>{
+    setImageLink(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${e}`)
+}
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='container'>
+      <p>Enter your text or URL</p>
+        <input value={inp} onChange={(e)=>GenerateQR(e.target.value)} type="text" placeholder="Text or URL" id="qrText"/>
+        <div id="imgBox" style={{marginLeft:"90px"}}>
+            <img src={imageLink} alt="" id="qrImage"/>
+        </div>
+        <button onClick={GenerateQR}>Generate QR code</button>
+    </div>
   )
 }
 
